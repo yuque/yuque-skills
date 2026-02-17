@@ -31,15 +31,15 @@ Each skill teaches an AI assistant how to perform a specific Yuque workflow: sea
 ### Claude Code
 
 ```bash
-# Install a single skill
-claude skill add --url https://github.com/chen201724/yuque-skills/tree/main/skills/smart-search
+# Option 1: Register as a plugin marketplace, then browse and install
+/plugin marketplace add chen201724/yuque-skills
 
-# Or clone and add locally
+# Option 2: Clone locally and use directly
 git clone https://github.com/chen201724/yuque-skills.git
-claude skill add ./yuque-skills/skills/smart-search
+# Skills will be auto-discovered from SKILL.md files in your project
 ```
 
-### Other Tools
+### Cursor / Other Tools
 
 Follow your tool's documentation for installing Agent Skills. The skills are standard `.skill` directories with `SKILL.md` files.
 

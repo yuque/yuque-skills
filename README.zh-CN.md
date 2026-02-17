@@ -31,15 +31,15 @@
 ### Claude Code
 
 ```bash
-# 安装单个 skill
-claude skill add --url https://github.com/chen201724/yuque-skills/tree/main/skills/smart-search
+# 方式 1：注册为插件市场，然后浏览安装
+/plugin marketplace add chen201724/yuque-skills
 
-# 或者克隆后本地安装
+# 方式 2：克隆到本地直接使用
 git clone https://github.com/chen201724/yuque-skills.git
-claude skill add ./yuque-skills/skills/smart-search
+# Claude Code 会自动发现项目中的 SKILL.md 文件
 ```
 
-### 其他工具
+### Cursor / 其他工具
 
 参考你所用工具的文档安装 Agent Skills。每个 skill 都是标准的目录结构，包含 `SKILL.md` 文件。
 
