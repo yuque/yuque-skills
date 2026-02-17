@@ -96,7 +96,7 @@ Present the draft to the user before saving. Ask:
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "Book"
+  type: "group"    # or "user" for personal repos
 ```
 
 Find or ask for the target repo (often "技术方案" or "设计文档" or "RFC").
@@ -104,14 +104,12 @@ Find or ask for the target repo (often "技术方案" or "设计文档" or "RFC"
 ```
 Tool: yuque_create_doc
 Parameters:
-  book_id: <target_repo_id>
+  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
   title: "[技术方案] <项目名称>"
   body: "<formatted design document>"
   format: "markdown"
-  status: 0              # 0 = draft (design docs usually need review)
 ```
 
-Note: Default to `status: 0` (draft) for design docs since they typically need team review before publishing.
 
 ### Step 6: Confirm
 

@@ -134,7 +134,7 @@ Ask the user which Yuque knowledge base to save to, or use `yuque_list_repos` to
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"    # team/group login, if known
-  type: "Book"
+  type: "group"    # or "user" for personal repos
 ```
 
 If the user hasn't specified a repo:
@@ -147,11 +147,10 @@ If the user hasn't specified a repo:
 ```
 Tool: yuque_create_doc
 Parameters:
-  book_id: <target_repo_id>
+  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
   title: "会议纪要：[主题] - YYYY-MM-DD"
   body: "<formatted markdown content>"
   format: "markdown"
-  status: 1              # 1 = published
 ```
 
 ### Step 6: Confirm to User

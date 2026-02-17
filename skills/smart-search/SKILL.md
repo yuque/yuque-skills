@@ -66,9 +66,15 @@ For each selected document, fetch the full content:
 ```
 Tool: yuque_get_doc
 Parameters:
-  namespace: "<book_slug>"
-  slug: "<doc_slug>"
+  repo_id: "<namespace>"    # e.g., "yuque/developer" (from search result's book.namespace)
+  doc_id: "<slug>"          # e.g., "api" (from search result's target.slug)
 ```
+
+Note: The search result contains nested data. Extract these key fields:
+- `target.slug` → use as `doc_id`
+- `target.book.namespace` → use as `repo_id`
+- `target.title` → document title
+- `target.updated_at` → last update time
 
 Read up to 3 documents. If the first document fully answers the question, you may skip the rest.
 

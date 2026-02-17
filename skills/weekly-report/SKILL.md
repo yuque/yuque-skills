@@ -2,7 +2,7 @@
 name: weekly-report
 description: Generate team weekly reports from Yuque activity data including document stats and member contributions. Use when the user wants to create a weekly summary of their team's documentation activity on Yuque.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with group/team access
+compatibility: Requires yuque-mcp server. Yuque API Token must have `statistic:read` permission for group stats.
 metadata:
   author: chen201724
   version: "1.0"
@@ -67,7 +67,7 @@ This returns: per-member doc count, word count, activity metrics.
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "Book"
+  type: "group"    # or "user" for personal repos
 ```
 
 This provides repo names for richer context in the report.
@@ -158,11 +158,10 @@ Ask the user which repo to save to, or suggest a "周报" / "团队管理" repo 
 ```
 Tool: yuque_create_doc
 Parameters:
-  book_id: <target_repo_id>
+  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
   title: "团队知识周报 YYYY-MM-DD ~ YYYY-MM-DD"
   body: "<formatted report>"
   format: "markdown"
-  status: 1
 ```
 
 ### Step 6: Confirm

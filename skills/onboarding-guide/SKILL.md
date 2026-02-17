@@ -50,7 +50,7 @@ If the user doesn't specify a role, generate a general-purpose guide.
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "Book"
+  type: "group"    # or "user" for personal repos
 ```
 
 #### 2b. Get TOC for Each Repo
@@ -203,11 +203,10 @@ Use this template:
 ```
 Tool: yuque_create_doc
 Parameters:
-  book_id: <target_repo_id>
+  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
   title: "新人入职阅读指南 - [角色] - YYYY-MM-DD"
   body: "<formatted guide>"
   format: "markdown"
-  status: 1
 ```
 
 ### Step 7: Confirm

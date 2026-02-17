@@ -2,7 +2,7 @@
 name: knowledge-report
 description: Generate comprehensive monthly knowledge management reports by analyzing team Yuque activity data including group stats, member contributions, knowledge base health, and document trends. Use when the user wants a monthly review of their team's knowledge management on Yuque.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with group/team access
+compatibility: Requires yuque-mcp server. Yuque API Token must have `statistic:read` permission for group stats.
 metadata:
   author: chen201724
   version: "1.0"
@@ -233,11 +233,10 @@ Use this template:
 ```
 Tool: yuque_create_doc
 Parameters:
-  book_id: <target_repo_id>
+  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
   title: "团队知识管理月报 - YYYY年MM月"
   body: "<formatted report>"
   format: "markdown"
-  status: 1
 ```
 
 ### Step 6: Confirm
