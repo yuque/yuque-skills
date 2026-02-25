@@ -1,0 +1,40 @@
+name: Sync Skills to Plugin
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout yuque-skills
+        uses: actions/checkout@v4
+        with:
+          path: skills-repo
+
+      - name: Checkout yuque-plugin
+        uses: actions/checkout@v4
+        with:
+          repository: yuque/yuque-plugin
+          token: ${{ secrets.PLUGIN_SYNC_TOKEN }}
+          path: plugin-repo
+
+      - name: Sync skills
+        run: |
+          rm -rf plugin-repo/skills
+          mkdir -p plugin-repo/skills
+          cp -r skills-repo/skills/* plugin-repo/skills/
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: plugin-repo
+          token: ${{ secrets.PLUGIN_SYNC_TOKEN }}
+          commit-message: "chore: sync skills from yuque-skills"
+          title: "chore: sync skills from yuque-skills"
+          body: "Automated sync of skills directory from [yuque-skills](https://github.com/yuque/yuque-skills) repository."
+          branch: chore/sync-skills
+          base: main
