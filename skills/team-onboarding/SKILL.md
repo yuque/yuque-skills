@@ -1,14 +1,14 @@
 ---
-name: onboarding-guide
-description: Automatically compile a team's core Yuque documents into a structured onboarding reading guide for new team members. Use when a new person joins the team and needs a curated reading list organized by priority and week.
+name: team-onboarding
+description: Automatically compile a team's core Yuque documents into a structured onboarding reading guide for new team members. For team use — scans team knowledge bases and generates a prioritized reading plan. Requires team Token.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with team/group access
+compatibility: Requires yuque-mcp server connected to a Yuque account with team Token (group-level access)
 metadata:
   author: chen201724
-  version: "1.0"
+  version: "2.0"
 ---
 
-# Onboarding Guide — New Member Reading Guide Generator
+# Team Onboarding — New Member Reading Guide Generator
 
 Scan a team's Yuque knowledge bases, identify core documents, and generate a structured onboarding reading guide organized by week and priority.
 
@@ -25,6 +25,7 @@ All tools are from the `yuque-mcp` server:
 - `yuque_list_repos` — List all knowledge bases in the team
 - `yuque_get_toc` — Get the table of contents for each knowledge base
 - `yuque_get_doc` — (Optional) Read specific docs for summary
+- `yuque_group_members` — Get team member list (for mentor assignment)
 - `yuque_create_doc` — Create the onboarding guide document
 
 ## Workflow
@@ -40,6 +41,8 @@ Gather from the user:
 | 入职日期 (Start date) | No | For timeline planning |
 | 特殊关注 (Focus areas) | No | Any specific topics to prioritize |
 
+If the user doesn't specify a group login, ask: "请告诉我团队的语雀团队标识（group login），我来生成入职阅读指南。"
+
 If the user doesn't specify a role, generate a general-purpose guide.
 
 ### Step 2: Scan Knowledge Bases
@@ -50,7 +53,7 @@ If the user doesn't specify a role, generate a general-purpose guide.
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "group"    # or "user" for personal repos
+  type: "group"
 ```
 
 #### 2b. Get TOC for Each Repo
@@ -64,6 +67,16 @@ Parameters:
 ```
 
 Collect all document titles, slugs, and hierarchy information.
+
+#### 2c. Get Team Members
+
+```
+Tool: yuque_group_members
+Parameters:
+  login: "<group_login>"
+```
+
+Use this to suggest a mentor or point of contact for the new member.
 
 ### Step 3: Categorize and Prioritize Documents
 
@@ -230,13 +243,17 @@ Parameters:
 - If a repo has no clear "getting started" doc, note it as a gap
 - Tailor the checklist items to the specified role
 - Keep the guide actionable — every item should have a clear link
+- Use team member info from `yuque_group_members` to suggest a mentor
 
 ## Error Handling
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_list_repos` returns empty | Ask user to verify group login |
+| `yuque_list_repos` returns empty | Ask user to verify group login and team Token |
 | `yuque_get_toc` fails for a repo | Skip that repo, note it in the guide |
+| `yuque_group_members` fails | Skip mentor suggestion, still generate the guide |
 | Team has very few docs (<10) | Create a simpler guide, suggest the team build more docs |
 | Team has many docs (>100) | Be more selective, focus on top 20-30 most important |
 | No docs match the specified role | Fall back to general guide, note role-specific docs are missing |
+| Group login not provided | Ask user for the team's group login |
+| Team Token not configured | Inform user that team features require a team-level Token |

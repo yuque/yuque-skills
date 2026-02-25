@@ -8,16 +8,42 @@
 
 - [yuque-mcp](https://github.com/yuque/yuque-mcp-server) server connected to your Yuque account
 
+## Token Types
+
+Yuque Skills are split into **Personal** and **Team** scenarios, each requiring a different Token:
+
+| Token Type | Scope | Use Case |
+|------------|-------|----------|
+| Personal Token | Your own knowledge bases | Search, write, and manage your personal docs |
+| Team Token | Team/group knowledge bases | Access team repos, member stats, group analytics. Requires group-level permissions. |
+
+> 💡 Personal skills only need a personal Token. Team skills require a team Token with appropriate permissions (e.g., `statistic:read` for reports).
+
 ## Skills
+
+### 🧑 Personal Skills
+
+For individual use — works with your personal Yuque knowledge bases.
 
 | Skill | Description |
 |-------|-------------|
-| [smart-search](skills/smart-search/) | Search Yuque docs with natural language and get summarized answers |
-| [meeting-notes](skills/meeting-notes/) | Format and archive meeting notes to Yuque |
-| [weekly-report](skills/weekly-report/) | Generate team weekly reports from Yuque activity data |
-| [tech-design](skills/tech-design/) | Write technical design docs using a standard template |
-| [onboarding-guide](skills/onboarding-guide/) | Generate onboarding reading guides for new team members |
-| [knowledge-report](skills/knowledge-report/) | Generate monthly knowledge management reports |
+| [personal-search](skills/personal-search/) | Search your personal Yuque docs with natural language and get summarized answers |
+| [personal-meeting-notes](skills/personal-meeting-notes/) | Format and archive meeting notes to your personal Yuque |
+| [personal-weekly](skills/personal-weekly/) | Generate personal weekly reports from your documentation activity |
+| [personal-tech-design](skills/personal-tech-design/) | Write technical design docs and save to your personal repo |
+
+### 👥 Team Skills
+
+For team use — works with team/group Yuque knowledge bases. Requires team Token.
+
+| Skill | Description |
+|-------|-------------|
+| [team-search](skills/team-search/) | Search team Yuque docs with natural language and get summarized answers |
+| [team-meeting-notes](skills/team-meeting-notes/) | Format and archive meeting notes to team Yuque |
+| [team-weekly](skills/team-weekly/) | Generate team weekly reports from Yuque activity data and member contributions |
+| [team-tech-design](skills/team-tech-design/) | Write technical design docs and save to team repo with review workflow |
+| [team-onboarding](skills/team-onboarding/) | Generate onboarding reading guides for new team members |
+| [team-knowledge-report](skills/team-knowledge-report/) | Generate monthly knowledge management reports with team analytics |
 
 ## Install
 
@@ -27,15 +53,15 @@ Each skill is a standalone folder with a `SKILL.md` file.
 
 ```bash
 # Download a single skill
-curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
-  -o .claude/skills/smart-search.md
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/personal-search/SKILL.md \
+  -o .claude/skills/personal-search.md
 ```
 
 ### Cursor
 
 ```bash
-curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
-  -o .cursor/skills/smart-search.md
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/personal-search/SKILL.md \
+  -o .cursor/skills/personal-search.md
 ```
 
 ### Other tools
@@ -43,10 +69,10 @@ curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-
 ```bash
 # Clone and copy the skill you need
 git clone https://github.com/yuque/yuque-skills.git
-cp -r yuque-skills/skills/smart-search /path/to/your/skills/
+cp -r yuque-skills/skills/personal-search /path/to/your/skills/
 ```
 
-Replace `smart-search` with any skill name from the table above.
+Replace `personal-search` with any skill name from the tables above.
 
 ## Related
 

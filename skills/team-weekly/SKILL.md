@@ -1,22 +1,22 @@
 ---
-name: weekly-report
-description: Generate team weekly reports from Yuque activity data including document stats and member contributions. Use when the user wants to create a weekly summary of their team's documentation activity on Yuque.
+name: team-weekly
+description: Generate team weekly reports from Yuque activity data including document stats and member contributions. For team use — aggregates team-wide documentation activity. Requires team Token with statistic:read permission.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server. Yuque API Token must have `statistic:read` permission for group stats.
+compatibility: Requires yuque-mcp server. Yuque API Token must be a team Token with `statistic:read` permission for group stats.
 metadata:
   author: chen201724
-  version: "1.0"
+  version: "2.0"
 ---
 
-# Weekly Report — Team Documentation Activity Report
+# Team Weekly — Team Documentation Activity Report
 
 Collect team activity data from Yuque (document stats, member contributions) and generate a structured weekly report, then save it to Yuque.
 
 ## When to Use
 
 - User asks for a team weekly report based on Yuque activity
-- User says "生成本周周报", "team weekly report", "本周文档活动总结"
-- End of week documentation activity review
+- User says "生成团队周报", "team weekly report", "本周团队文档活动总结"
+- End of week team documentation activity review
 
 ## Required MCP Tools
 
@@ -35,7 +35,7 @@ Ask the user or determine from context:
 - **Group login** (e.g., `my-team`) — required for API calls
 - **Report period** — default to the current week (Monday to Sunday)
 
-If the user doesn't specify a group, ask: "请告诉我团队的语雀团队标识（group login），我来生成周报。"
+If the user doesn't specify a group, ask: "请告诉我团队的语雀团队标识（group login），我来生成团队周报。"
 
 ### Step 2: Collect Data
 
@@ -67,7 +67,7 @@ This returns: per-member doc count, word count, activity metrics.
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "group"    # or "user" for personal repos
+  type: "group"
 ```
 
 This provides repo names for richer context in the report.
@@ -167,7 +167,7 @@ Parameters:
 ### Step 6: Confirm
 
 ```markdown
-✅ 周报已生成并保存！
+✅ 团队周报已生成并保存！
 
 📄 **[团队知识周报 日期范围](文档链接)**
 📚 已归档到：「知识库名称」
@@ -185,24 +185,16 @@ Parameters:
 - If a team has many members, show top 5 in the main table and mention total count
 - Use emoji in headers for visual scanning but keep the tone professional
 - Default report language is Chinese
+- For personal weekly reports, use `personal-weekly` skill instead
 
 ## Error Handling
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_group_doc_stats` fails | Inform user, check if group login is correct |
+| `yuque_group_doc_stats` fails | Inform user, check if group login is correct and team Token is configured |
 | `yuque_group_member_stats` fails | Generate report without member breakdown, note the gap |
 | Group has no activity this week | Create a brief report noting zero activity, suggest reasons |
 | User doesn't know group login | Use `yuque_list_repos` with their personal login to find groups |
 | API returns partial data | Generate report with available data, note what's missing |
-
-## Example
-
-User: "帮我生成本周的团队周报，团队是 my-awesome-team"
-
-1. `yuque_group_doc_stats(login="my-awesome-team")` → 12 new docs, 34 updates
-2. `yuque_group_member_stats(login="my-awesome-team")` → 8 active members
-3. `yuque_list_repos(login="my-awesome-team")` → 5 repos for context
-4. Generate report with template
-5. `yuque_create_doc(...)` → save to designated repo
-6. Confirm with link and highlights
+| User wants a personal report | Suggest using `personal-weekly` skill instead |
+| Team Token missing statistic:read | Inform user the Token needs `statistic:read` permission |
