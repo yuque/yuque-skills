@@ -135,7 +135,7 @@ Parameters:
 - Keep the document actionable — someone should be able to implement from this doc
 - If the user's requirements are vague, make reasonable assumptions and note them clearly with "【假设】" markers
 - Don't over-engineer — match the design complexity to the project scope
-- This skill saves to personal repos — for team repos, use `team-tech-design`
+- This skill saves to personal repos — for group repos, use `group-tech-design`
 
 ## Error Handling
 
@@ -145,4 +145,4 @@ Parameters:
 | `yuque_search` finds conflicting existing designs | Mention them and ask user how to reconcile |
 | `yuque_create_doc` fails | Show error, offer to output the markdown for manual copy |
 | User wants to update an existing design doc | Use `yuque_search` to find it, then suggest creating a v2 or appendix |
-| User wants to save to team repo | Suggest using `team-tech-design` skill instead |
+| User wants to save to group repo | Suggest using `group-tech-design` skill instead |

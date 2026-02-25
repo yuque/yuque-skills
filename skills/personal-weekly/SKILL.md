@@ -167,7 +167,7 @@ Parameters:
 - Keep suggestions constructive and specific
 - Use emoji in headers for visual scanning but keep the tone professional
 - Default report language is Chinese
-- For team weekly reports, use `team-weekly` skill instead
+- For group weekly reports, use `group-weekly` skill instead
 
 ## Error Handling
 
@@ -177,4 +177,4 @@ Parameters:
 | `yuque_list_docs` fails for a repo | Skip that repo, note it in the report |
 | No activity this week | Create a brief report noting zero activity, suggest topics to write about |
 | Too many repos to scan | Focus on the most recently active repos (top 10) |
-| User wants a team report | Suggest using `team-weekly` skill instead |
+| User wants a group report | Suggest using `group-weekly` skill instead |

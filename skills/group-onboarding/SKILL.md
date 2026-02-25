@@ -1,42 +1,42 @@
 ---
-name: team-onboarding
-description: Automatically compile a team's core Yuque documents into a structured onboarding reading guide for new team members. For team use — scans team knowledge bases and generates a prioritized reading plan. Requires team Token.
+name: group-onboarding
+description: Automatically compile a group's core Yuque documents into a structured onboarding reading guide for new group members. For group use — scans group knowledge bases and generates a prioritized reading plan. Requires group Token.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with team Token (group-level access)
+compatibility: Requires yuque-mcp server connected to a Yuque account with group Token (group-level access)
 metadata:
   author: chen201724
   version: "2.0"
 ---
 
-# Team Onboarding — New Member Reading Guide Generator
+# Group Onboarding — New Member Reading Guide Generator
 
-Scan a team's Yuque knowledge bases, identify core documents, and generate a structured onboarding reading guide organized by week and priority.
+Scan a group's Yuque knowledge bases, identify core documents, and generate a structured onboarding reading guide organized by week and priority.
 
 ## When to Use
 
-- A new team member is joining and needs a reading list
+- A new group member is joining and needs a reading list
 - User says "帮新人整理入职文档", "create onboarding guide", "新人入职知识包"
-- Team lead wants to create a standard onboarding reading plan
+- Group lead wants to create a standard onboarding reading plan
 
 ## Required MCP Tools
 
 All tools are from the `yuque-mcp` server:
 
-- `yuque_list_repos` — List all knowledge bases in the team
+- `yuque_list_repos` — List all knowledge bases in the group
 - `yuque_get_toc` — Get the table of contents for each knowledge base
 - `yuque_get_doc` — (Optional) Read specific docs for summary
-- `yuque_group_members` — Get team member list (for mentor assignment)
+- `yuque_group_members` — Get group member list (for mentor assignment)
 - `yuque_create_doc` — Create the onboarding guide document
 
 ## Workflow
 
-### Step 1: Identify the Team and Context
+### Step 1: Identify the Group and Context
 
 Gather from the user:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| 团队标识 (Group login) | Yes | The team's Yuque group login |
+| 团队标识 (Group login) | Yes | The group's Yuque group login |
 | 新人角色 (Role) | No | e.g., 前端开发、后端开发、产品经理、设计师 |
 | 入职日期 (Start date) | No | For timeline planning |
 | 特殊关注 (Focus areas) | No | Any specific topics to prioritize |
@@ -68,7 +68,7 @@ Parameters:
 
 Collect all document titles, slugs, and hierarchy information.
 
-#### 2c. Get Team Members
+#### 2c. Get Group Members
 
 ```
 Tool: yuque_group_members
@@ -243,17 +243,17 @@ Parameters:
 - If a repo has no clear "getting started" doc, note it as a gap
 - Tailor the checklist items to the specified role
 - Keep the guide actionable — every item should have a clear link
-- Use team member info from `yuque_group_members` to suggest a mentor
+- Use group member info from `yuque_group_members` to suggest a mentor
 
 ## Error Handling
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_list_repos` returns empty | Ask user to verify group login and team Token |
+| `yuque_list_repos` returns empty | Ask user to verify group login and group Token |
 | `yuque_get_toc` fails for a repo | Skip that repo, note it in the guide |
 | `yuque_group_members` fails | Skip mentor suggestion, still generate the guide |
-| Team has very few docs (<10) | Create a simpler guide, suggest the team build more docs |
-| Team has many docs (>100) | Be more selective, focus on top 20-30 most important |
+| Group has very few docs (<10) | Create a simpler guide, suggest the group build more docs |
+| Group has many docs (>100) | Be more selective, focus on top 20-30 most important |
 | No docs match the specified role | Fall back to general guide, note role-specific docs are missing |
-| Group login not provided | Ask user for the team's group login |
-| Team Token not configured | Inform user that team features require a team-level Token |
+| Group login not provided | Ask user for the group's login |
+| Group Token not configured | Inform user that group features require a group-level Token |

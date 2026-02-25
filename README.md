@@ -10,14 +10,14 @@
 
 ## Token Types
 
-Yuque Skills are split into **Personal** and **Team** scenarios, each requiring a different Token:
+Yuque Skills are split into **Personal** and **Group** scenarios, each requiring a different Token:
 
 | Token Type | Scope | Use Case |
 |------------|-------|----------|
 | Personal Token | Your own knowledge bases | Search, write, and manage your personal docs |
-| Team Token | Team/group knowledge bases | Access team repos, member stats, group analytics. Requires group-level permissions. |
+| Group Token | Group knowledge bases | Access group repos, member stats, group analytics. Requires group-level permissions. |
 
-> 💡 Personal skills only need a personal Token. Team skills require a team Token with appropriate permissions (e.g., `statistic:read` for reports).
+> 💡 Personal skills only need a personal Token. Team skills require a group Token with appropriate permissions (e.g., `statistic:read` for reports).
 
 ## Skills
 
@@ -32,18 +32,18 @@ For individual use — works with your personal Yuque knowledge bases.
 | [personal-weekly](skills/personal-weekly/) | Generate personal weekly reports from your documentation activity |
 | [personal-tech-design](skills/personal-tech-design/) | Write technical design docs and save to your personal repo |
 
-### 👥 Team Skills
+### 👥 Group Skills
 
-For team use — works with team/group Yuque knowledge bases. Requires team Token.
+For group use — works with group Yuque knowledge bases. Requires group Token.
 
 | Skill | Description |
 |-------|-------------|
-| [team-search](skills/team-search/) | Search team Yuque docs with natural language and get summarized answers |
-| [team-meeting-notes](skills/team-meeting-notes/) | Format and archive meeting notes to team Yuque |
-| [team-weekly](skills/team-weekly/) | Generate team weekly reports from Yuque activity data and member contributions |
-| [team-tech-design](skills/team-tech-design/) | Write technical design docs and save to team repo with review workflow |
-| [team-onboarding](skills/team-onboarding/) | Generate onboarding reading guides for new team members |
-| [team-knowledge-report](skills/team-knowledge-report/) | Generate monthly knowledge management reports with team analytics |
+| [group-search](skills/group-search/) | Search group Yuque docs with natural language and get summarized answers |
+| [group-meeting-notes](skills/group-meeting-notes/) | Format and archive meeting notes to group Yuque |
+| [group-weekly](skills/group-weekly/) | Generate group weekly reports from Yuque activity data and member contributions |
+| [group-tech-design](skills/group-tech-design/) | Write technical design docs and save to group repo with review workflow |
+| [group-onboarding](skills/group-onboarding/) | Generate onboarding reading guides for new group members |
+| [group-knowledge-report](skills/group-knowledge-report/) | Generate monthly knowledge management reports with group analytics |
 
 ## Install
 
