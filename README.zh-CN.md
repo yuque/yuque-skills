@@ -38,12 +38,12 @@ Yuque Skills 按**个人**和**团队**场景拆分，分别需要不同的 Toke
 
 | Skill | 描述 |
 |-------|------|
-| [team-search](skills/team-search/) | 用自然语言搜索团队语雀文档并总结要点 |
-| [team-meeting-notes](skills/team-meeting-notes/) | 整理会议内容为标准格式并归档到团队语雀 |
-| [team-weekly](skills/team-weekly/) | 基于语雀团队活动数据和成员贡献生成团队周报 |
-| [team-tech-design](skills/team-tech-design/) | 按标准模板撰写技术方案文档并存到团队知识库（含评审流程） |
-| [team-onboarding](skills/team-onboarding/) | 自动整理团队核心文档生成新人入职阅读指南 |
-| [team-knowledge-report](skills/team-knowledge-report/) | 全面分析团队知识管理数据并生成月报 |
+| [group-search](skills/group-search/) | 用自然语言搜索团队语雀文档并总结要点 |
+| [group-meeting-notes](skills/group-meeting-notes/) | 整理会议内容为标准格式并归档到团队语雀 |
+| [group-weekly](skills/group-weekly/) | 基于语雀团队活动数据和成员贡献生成团队周报 |
+| [group-tech-design](skills/group-tech-design/) | 按标准模板撰写技术方案文档并存到团队知识库（含评审流程） |
+| [group-onboarding](skills/group-onboarding/) | 自动整理团队核心文档生成新人入职阅读指南 |
+| [group-knowledge-report](skills/group-knowledge-report/) | 全面分析团队知识管理数据并生成月报 |
 
 ## 安装
 

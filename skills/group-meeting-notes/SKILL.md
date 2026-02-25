@@ -1,8 +1,8 @@
 ---
-name: team-meeting-notes
-description: Format meeting content into structured meeting notes and archive them to a team Yuque knowledge base. For team use — saves to team/group repos. Requires team Token.
+name: group-meeting-notes
+description: Format meeting content into structured meeting notes and archive them to a group Yuque knowledge base. For group use — saves to team/group repos. Requires group Token.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with team Token (group-level access)
+compatibility: Requires yuque-mcp server connected to a Yuque account with group Token (group-level access)
 metadata:
   author: chen201724
   version: "2.0"
@@ -15,14 +15,14 @@ Take raw meeting information from the user, format it into a standard meeting no
 ## When to Use
 
 - User shares meeting content and wants it saved to the team's Yuque
-- User says "帮我整理会议纪要到团队库", "save meeting notes to team repo", "把会议记录存到团队知识库"
-- User pastes unstructured meeting notes and wants them formatted and saved to team repo
+- User says "帮我整理会议纪要到团队库", "save meeting notes to group repo", "把会议记录存到团队知识库"
+- User pastes unstructured meeting notes and wants them formatted and saved to group repo
 
 ## Required MCP Tools
 
 All tools are from the `yuque-mcp` server:
 
-- `yuque_list_repos` — List team knowledge bases to find the target repo
+- `yuque_list_repos` — List group knowledge bases to find the target repo
 - `yuque_create_doc` — Create the meeting notes document
 
 ## Workflow
@@ -141,7 +141,7 @@ Parameters:
 ```
 
 If the user hasn't specified a repo:
-1. List available team repos and ask the user to pick one
+1. List available group repos and ask the user to pick one
 2. If there's an obvious "会议纪要" or "Meeting Notes" repo, suggest it
 3. If the user says "就放那个会议的库", match by name
 
@@ -179,17 +179,17 @@ After creation, respond with:
 - Keep the document well-structured; prefer tables for action items
 - If the user provides audio transcription, clean up filler words and organize by topic
 - Preserve the user's original wording for decisions and action items — don't paraphrase important commitments
-- This skill saves to team repos — for personal repos, use `personal-meeting-notes`
+- This skill saves to group repos — for personal repos, use `personal-meeting-notes`
 
 ## Error Handling
 
 | Situation | Action |
 |-----------|--------|
 | User provides very little info | Ask for at least: topic, attendees, key decisions |
-| `yuque_list_repos` returns empty | Ask user to verify group login and team Token |
-| `yuque_create_doc` fails (403) | Tell user they may lack write permission; check team Token scope |
+| `yuque_list_repos` returns empty | Ask user to verify group login and group Token |
+| `yuque_create_doc` fails (403) | Tell user they may lack write permission; check group Token scope |
 | `yuque_create_doc` fails (other) | Show error, suggest user check yuque-mcp connection |
 | No clear action items | Still create the doc, note "本次会议无明确待办事项" |
 | User wants to save to personal repo | Suggest using `personal-meeting-notes` skill instead |
 | Group login not provided | Ask user for the team's group login |
-| Team Token not configured | Inform user that team repos require a team-level Token |
+| Team Token not configured | Inform user that group repos require a team-level Token |

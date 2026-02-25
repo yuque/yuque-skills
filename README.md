@@ -38,12 +38,12 @@ For team use — works with team/group Yuque knowledge bases. Requires team Toke
 
 | Skill | Description |
 |-------|-------------|
-| [team-search](skills/team-search/) | Search team Yuque docs with natural language and get summarized answers |
-| [team-meeting-notes](skills/team-meeting-notes/) | Format and archive meeting notes to team Yuque |
-| [team-weekly](skills/team-weekly/) | Generate team weekly reports from Yuque activity data and member contributions |
-| [team-tech-design](skills/team-tech-design/) | Write technical design docs and save to team repo with review workflow |
-| [team-onboarding](skills/team-onboarding/) | Generate onboarding reading guides for new team members |
-| [team-knowledge-report](skills/team-knowledge-report/) | Generate monthly knowledge management reports with team analytics |
+| [group-search](skills/group-search/) | Search team Yuque docs with natural language and get summarized answers |
+| [group-meeting-notes](skills/group-meeting-notes/) | Format and archive meeting notes to team Yuque |
+| [group-weekly](skills/group-weekly/) | Generate team weekly reports from Yuque activity data and member contributions |
+| [group-tech-design](skills/group-tech-design/) | Write technical design docs and save to team repo with review workflow |
+| [group-onboarding](skills/group-onboarding/) | Generate onboarding reading guides for new team members |
+| [group-knowledge-report](skills/group-knowledge-report/) | Generate monthly knowledge management reports with team analytics |
 
 ## Install
 

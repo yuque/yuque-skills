@@ -1,8 +1,8 @@
 ---
-name: team-search
-description: Search team Yuque knowledge bases with natural language queries and provide summarized answers with key points and source links. For team use — searches within team/group repositories. Requires team Token.
+name: group-search
+description: Search group Yuque knowledge bases with natural language queries and provide summarized answers with key points and source links. For group use — searches within team/group repositories. Requires group Token.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account with team Token (group-level access)
+compatibility: Requires yuque-mcp server connected to a Yuque account with group Token (group-level access)
 metadata:
   author: chen201724
   version: "2.0"
@@ -10,19 +10,19 @@ metadata:
 
 # Team Search — Yuque Team Knowledge Base Search & Q&A
 
-Search across team Yuque knowledge bases using natural language, read relevant documents, and synthesize a clear answer with references. Scoped to team/group repositories.
+Search across group Yuque knowledge bases using natural language, read relevant documents, and synthesize a clear answer with references. Scoped to team/group repositories.
 
 ## When to Use
 
 - User asks a question that might be answered by their team's Yuque docs
-- User wants to find specific information in team knowledge bases
-- User says "搜一下团队文档", "search team Yuque", "团队知识库里有没有..."
+- User wants to find specific information in group knowledge bases
+- User says "搜一下团队文档", "search group Yuque", "团队知识库里有没有..."
 
 ## Required MCP Tools
 
 All tools are from the `yuque-mcp` server:
 
-- `yuque_list_repos` — List team knowledge bases to determine search scope
+- `yuque_list_repos` — List group knowledge bases to determine search scope
 - `yuque_search` — Search documents by keyword
 - `yuque_get_doc` — Read full document content by slug/id
 
@@ -30,7 +30,7 @@ All tools are from the `yuque-mcp` server:
 
 ### Step 1: Identify Team Scope
 
-First, get the list of team knowledge bases to understand the search scope:
+First, get the list of group knowledge bases to understand the search scope:
 
 ```
 Tool: yuque_list_repos
@@ -71,7 +71,7 @@ If the search returns no results:
 From the search results, select the top 3-5 most relevant documents based on:
 - Title relevance to the query
 - Document update time (prefer recent)
-- Repository context (prioritize results from team repos identified in Step 1)
+- Repository context (prioritize results from group repos identified in Step 1)
 
 Filter out results that don't belong to the team's knowledge bases.
 
@@ -123,18 +123,18 @@ Compose the answer in the following format:
 - If the answer is only partially found, say what you found and what's missing
 - Never fabricate information not present in the documents
 - Include document links so the user can read the full source
-- Only return results from team knowledge bases — filter out personal docs
-- This skill searches team knowledge bases — for personal docs, use `personal-search`
+- Only return results from group knowledge bases — filter out personal docs
+- This skill searches group knowledge bases — for personal docs, use `personal-search`
 
 ## Error Handling
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_list_repos` fails | Check if group login is correct and team Token is configured |
+| `yuque_list_repos` fails | Check if group login is correct and group Token is configured |
 | `yuque_search` returns empty | Try alternative keywords, then inform user |
 | `yuque_get_doc` fails (404) | Skip this doc, note it may have been deleted |
-| `yuque_get_doc` fails (403) | Tell user they may lack permission; check team Token scope |
+| `yuque_get_doc` fails (403) | Tell user they may lack permission; check group Token scope |
 | API timeout | Retry once, then inform user of connectivity issue |
 | Too many results | Focus on top 3 by relevance, mention there are more results available |
 | User wants to search personal docs | Suggest using `personal-search` skill instead |
-| Team Token not configured | Inform user that team search requires a team-level Token |
+| Team Token not configured | Inform user that group search requires a team-level Token |
