@@ -1,8 +1,8 @@
 ---
-name: team-weekly
-description: Generate team weekly reports from Yuque activity data including document stats and member contributions. For team use — aggregates team-wide documentation activity. Requires team Token with statistic:read permission.
+name: group-weekly
+description: Generate group weekly reports from Yuque activity data including document stats and member contributions. For group use — aggregates team-wide documentation activity. Requires group Token with statistic:read permission.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server. Yuque API Token must be a team Token with `statistic:read` permission for group stats.
+compatibility: Requires yuque-mcp server. Yuque API Token must be a group Token with `statistic:read` permission for group stats.
 metadata:
   author: chen201724
   version: "2.0"
@@ -10,13 +10,13 @@ metadata:
 
 # Team Weekly — Team Documentation Activity Report
 
-Collect team activity data from Yuque (document stats, member contributions) and generate a structured weekly report, then save it to Yuque.
+Collect group activity data from Yuque (document stats, member contributions) and generate a structured weekly report, then save it to Yuque.
 
 ## When to Use
 
-- User asks for a team weekly report based on Yuque activity
-- User says "生成团队周报", "team weekly report", "本周团队文档活动总结"
-- End of week team documentation activity review
+- User asks for a group weekly report based on Yuque activity
+- User says "生成团队周报", "group weekly report", "本周团队文档活动总结"
+- End of week group documentation activity review
 
 ## Required MCP Tools
 
@@ -182,7 +182,7 @@ Parameters:
 
 - If week-over-week comparison data is not available, omit the "上周" and "变化" columns — don't fabricate numbers
 - Keep suggestions constructive and specific (e.g., "建议 XX 知识库补充 API 文档" rather than generic "多写文档")
-- If a team has many members, show top 5 in the main table and mention total count
+- If a group has many members, show top 5 in the main table and mention total count
 - Use emoji in headers for visual scanning but keep the tone professional
 - Default report language is Chinese
 - For personal weekly reports, use `personal-weekly` skill instead
@@ -191,7 +191,7 @@ Parameters:
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_group_doc_stats` fails | Inform user, check if group login is correct and team Token is configured |
+| `yuque_group_doc_stats` fails | Inform user, check if group login is correct and group Token is configured |
 | `yuque_group_member_stats` fails | Generate report without member breakdown, note the gap |
 | Group has no activity this week | Create a brief report noting zero activity, suggest reasons |
 | User doesn't know group login | Use `yuque_list_repos` with their personal login to find groups |
