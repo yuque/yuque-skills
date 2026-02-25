@@ -107,7 +107,7 @@ Compose the answer in the following format:
 - If the answer is only partially found, say what you found and what's missing
 - Never fabricate information not present in the documents
 - Include document links so the user can read the full source
-- This skill searches the user's personal knowledge bases — for team knowledge bases, use `team-search`
+- This skill searches the user's personal knowledge bases — for group knowledge bases, use `group-search`
 
 ## Error Handling
 
@@ -118,4 +118,4 @@ Compose the answer in the following format:
 | `yuque_get_doc` fails (403) | Tell user they may lack permission to access this doc |
 | API timeout | Retry once, then inform user of connectivity issue |
 | Too many results | Focus on top 3 by relevance, mention there are more results available |
-| User wants to search team docs | Suggest using `team-search` skill instead |
+| User wants to search group docs | Suggest using `group-search` skill instead |
