@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-- [yuque-mcp](https://github.com/chen201724/yuque-mcp-server) server connected to your Yuque account
+- [yuque-mcp](https://github.com/yuque/yuque-mcp-server) server connected to your Yuque account
 
 ## Skills
 
@@ -27,14 +27,14 @@ Each skill is a standalone folder with a `SKILL.md` file.
 
 ```bash
 # Download a single skill
-curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/smart-search/SKILL.md \
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
   -o .claude/skills/smart-search.md
 ```
 
 ### Cursor
 
 ```bash
-curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/smart-search/SKILL.md \
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
   -o .cursor/skills/smart-search.md
 ```
 
@@ -42,7 +42,7 @@ curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/s
 
 ```bash
 # Clone and copy the skill you need
-git clone https://github.com/chen201724/yuque-skills.git
+git clone https://github.com/yuque/yuque-skills.git
 cp -r yuque-skills/skills/smart-search /path/to/your/skills/
 ```
 
@@ -50,8 +50,8 @@ Replace `smart-search` with any skill name from the table above.
 
 ## Related
 
-- [Yuque AI Ecosystem](https://chen201724.github.io/yuque-ecosystem/) — Website
-- [yuque-mcp](https://github.com/chen201724/yuque-mcp-server) — MCP server for Yuque
+- [Yuque AI Ecosystem](https://yuque.github.io/yuque-ecosystem/) — Website
+- [yuque-mcp](https://github.com/yuque/yuque-mcp-server) — MCP server for Yuque
 
 ## License
 

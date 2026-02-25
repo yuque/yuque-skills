@@ -6,7 +6,7 @@
 
 ## 前置条件
 
-- 运行中的 [yuque-mcp](https://github.com/chen201724/yuque-mcp-server) 服务，已连接你的语雀账号
+- 运行中的 [yuque-mcp](https://github.com/yuque/yuque-mcp-server) 服务，已连接你的语雀账号
 
 ## Skills 列表
 
@@ -27,14 +27,14 @@
 
 ```bash
 # 下载单个 skill
-curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/smart-search/SKILL.md \
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
   -o .claude/skills/smart-search.md
 ```
 
 ### Cursor
 
 ```bash
-curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/smart-search/SKILL.md \
+curl -sL https://raw.githubusercontent.com/yuque/yuque-skills/main/skills/smart-search/SKILL.md \
   -o .cursor/skills/smart-search.md
 ```
 
@@ -42,7 +42,7 @@ curl -sL https://raw.githubusercontent.com/chen201724/yuque-skills/main/skills/s
 
 ```bash
 # 克隆仓库，复制需要的 skill
-git clone https://github.com/chen201724/yuque-skills.git
+git clone https://github.com/yuque/yuque-skills.git
 cp -r yuque-skills/skills/smart-search /path/to/your/skills/
 ```
 
@@ -50,8 +50,8 @@ cp -r yuque-skills/skills/smart-search /path/to/your/skills/
 
 ## 相关项目
 
-- [语雀 AI 生态官网](https://chen201724.github.io/yuque-ecosystem/) — 官网
-- [yuque-mcp](https://github.com/chen201724/yuque-mcp-server) — 语雀 MCP 服务
+- [语雀 AI 生态官网](https://yuque.github.io/yuque-ecosystem/) — 官网
+- [yuque-mcp](https://github.com/yuque/yuque-mcp-server) — 语雀 MCP 服务
 
 ## 许可证
 
