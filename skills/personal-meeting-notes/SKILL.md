@@ -1,28 +1,28 @@
 ---
-name: meeting-notes
-description: Format meeting content into structured meeting notes and archive them to Yuque. Use when the user provides meeting information (agenda, discussion points, decisions) and wants to create a well-formatted meeting notes document in their Yuque knowledge base.
+name: personal-meeting-notes
+description: Format meeting content into structured meeting notes and archive them to your personal Yuque knowledge base. For personal/individual use — saves to your own repos.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account
+compatibility: Requires yuque-mcp server connected to a Yuque account with personal Token
 metadata:
   author: chen201724
-  version: "1.0"
+  version: "2.0"
 ---
 
-# Meeting Notes — Format and Archive to Yuque
+# Personal Meeting Notes — Format and Archive to Personal Yuque
 
-Take raw meeting information from the user, format it into a standard meeting notes template, and create a document in the appropriate Yuque knowledge base.
+Take raw meeting information from the user, format it into a standard meeting notes template, and create a document in the user's personal Yuque knowledge base.
 
 ## When to Use
 
-- User shares meeting content and wants it saved to Yuque
+- User shares meeting content and wants it saved to their personal Yuque
 - User says "帮我整理会议纪要", "create meeting notes", "记录一下今天的会议"
-- User pastes unstructured meeting notes and wants them formatted
+- User pastes unstructured meeting notes and wants them formatted and saved to personal repo
 
 ## Required MCP Tools
 
 All tools are from the `yuque-mcp` server:
 
-- `yuque_list_repos` — List available knowledge bases to find the target repo
+- `yuque_list_repos` — List personal knowledge bases to find the target repo
 - `yuque_create_doc` — Create the meeting notes document
 
 ## Workflow
@@ -126,19 +126,18 @@ Use this template:
 > 本纪要由 AI 助手整理，如有遗漏请补充。
 ```
 
-### Step 4: Confirm Target Repository
+### Step 4: Find Personal Repository
 
-Ask the user which Yuque knowledge base to save to, or use `yuque_list_repos` to find it:
+List the user's personal knowledge bases:
 
 ```
 Tool: yuque_list_repos
 Parameters:
-  login: "<group_login>"    # team/group login, if known
-  type: "group"    # or "user" for personal repos
+  type: "user"
 ```
 
 If the user hasn't specified a repo:
-1. List available repos and ask the user to pick one
+1. List available personal repos and ask the user to pick one
 2. If there's an obvious "会议纪要" or "Meeting Notes" repo, suggest it
 3. If the user says "就放那个会议的库", match by name
 
@@ -147,7 +146,7 @@ If the user hasn't specified a repo:
 ```
 Tool: yuque_create_doc
 Parameters:
-  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
+  repo_id: "<namespace>"    # e.g., "username/meeting-notes"
   title: "会议纪要：[主题] - YYYY-MM-DD"
   body: "<formatted markdown content>"
   format: "markdown"
@@ -161,7 +160,7 @@ After creation, respond with:
 ✅ 会议纪要已创建！
 
 📄 **[会议纪要：主题 - 日期](文档链接)**
-📚 已归档到：「知识库名称」
+📚 已归档到：「个人知识库名称」
 
 ### 摘要
 - 共讨论 X 个议题
@@ -171,11 +170,12 @@ After creation, respond with:
 
 ## Guidelines
 
-- Default to Chinese for the document content (Yuque users are primarily Chinese-speaking)
+- Default to Chinese for the document content
 - Use emoji sparingly in section headers for visual scanning — as shown in the template
 - Keep the document well-structured; prefer tables for action items
 - If the user provides audio transcription, clean up filler words and organize by topic
 - Preserve the user's original wording for decisions and action items — don't paraphrase important commitments
+- This skill saves to personal repos — for team repos, use `team-meeting-notes`
 
 ## Error Handling
 
@@ -186,14 +186,4 @@ After creation, respond with:
 | `yuque_create_doc` fails (403) | Tell user they may lack write permission to this repo |
 | `yuque_create_doc` fails (other) | Show error, suggest user check yuque-mcp connection |
 | No clear action items | Still create the doc, note "本次会议无明确待办事项" |
-
-## Example
-
-User: "帮我整理一下今天下午的会议。参加的有张三、李四、王五。讨论了新版本发布计划，决定下周三发布 v2.0，张三负责前端打包，李四负责后端部署，王五写发布公告。"
-
-1. Extract: topic="新版本发布计划", date=today, attendees=张三/李四/王五
-2. Structure: 1 agenda item, 1 decision (下周三发布 v2.0), 3 action items
-3. Format using template
-4. `yuque_list_repos` → find appropriate repo
-5. `yuque_create_doc` → create document
-6. Confirm with link and summary
+| User wants to save to team repo | Suggest using `team-meeting-notes` skill instead |

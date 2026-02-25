@@ -1,29 +1,29 @@
 ---
-name: tech-design
-description: Generate technical design documents using a standard template and save them to Yuque. Use when the user needs to write a technical design doc, RFC, or architecture proposal for a new feature, system, or project.
+name: team-tech-design
+description: Generate technical design documents using a standard template and save them to a team Yuque knowledge base. For team use — stores designs in team repos with review workflow. Requires team Token.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server connected to a Yuque account
+compatibility: Requires yuque-mcp server connected to a Yuque account with team Token (group-level access)
 metadata:
   author: chen201724
-  version: "1.0"
+  version: "2.0"
 ---
 
-# Tech Design — Technical Design Document Generator
+# Team Tech Design — Technical Design Document Generator (Team)
 
-Help the user write a structured technical design document following a standard template, then save it to Yuque.
+Help the user write a structured technical design document following a standard template, then save it to the team's Yuque knowledge base for team review.
 
 ## When to Use
 
-- User wants to write a technical design document or RFC
-- User says "帮我写技术方案", "write a tech design", "我要写个设计文档"
-- User describes a feature/system and needs it formalized into a design doc
+- User wants to write a technical design document or RFC and save it to the team repo
+- User says "帮我写技术方案到团队库", "write a tech design for the team", "团队技术方案"
+- User describes a feature/system and needs it formalized into a design doc for team review
 
 ## Required MCP Tools
 
 All tools are from the `yuque-mcp` server:
 
 - `yuque_search` — (Optional) Search for related existing docs for context
-- `yuque_list_repos` — Find the target knowledge base
+- `yuque_list_repos` — Find the target team knowledge base
 - `yuque_create_doc` — Create the design document
 
 ## Reference
@@ -43,11 +43,14 @@ Gather from the user:
 | 目标 | Yes | What success looks like |
 | 约束条件 | No | Technical constraints, timeline, budget |
 | 已有方案 | No | Any existing approaches or prior art |
+| 团队标识 (Group login) | Yes | The team's Yuque group login |
 
 If the user provides a brief description, ask clarifying questions:
 - "这个功能要解决什么问题？"
 - "有什么技术约束吗？比如必须用某个框架、要兼容现有系统？"
 - "预期的时间节点是什么？"
+
+If the user hasn't specified a group login, ask: "请告诉我团队的语雀团队标识（group login），我来把技术方案存到团队知识库。"
 
 ### Step 2: (Optional) Search for Context
 
@@ -90,26 +93,25 @@ Present the draft to the user before saving. Ask:
 - "方案内容是否准确？有需要调整的地方吗？"
 - "要补充其他技术细节吗？"
 
-### Step 5: Save to Yuque
+### Step 5: Save to Team Yuque
 
 ```
 Tool: yuque_list_repos
 Parameters:
   login: "<group_login>"
-  type: "group"    # or "user" for personal repos
+  type: "group"
 ```
 
-Find or ask for the target repo (often "技术方案" or "设计文档" or "RFC").
+Find or ask for the target team repo (often "技术方案" or "设计文档" or "RFC").
 
 ```
 Tool: yuque_create_doc
 Parameters:
-  repo_id: "<namespace>"    # e.g., "mygroup/mybook"
+  repo_id: "<namespace>"    # e.g., "my-team/tech-docs"
   title: "[技术方案] <项目名称>"
   body: "<formatted design document>"
   format: "markdown"
 ```
-
 
 ### Step 6: Confirm
 
@@ -117,7 +119,7 @@ Parameters:
 ✅ 技术方案已创建（草稿状态）！
 
 📄 **[[技术方案] 项目名称](文档链接)**
-📚 已保存到：「知识库名称」
+📚 已保存到：「团队知识库名称」
 
 ### 文档结构
 - 背景与目标
@@ -137,6 +139,8 @@ Parameters:
 - Keep the document actionable — someone should be able to implement from this doc
 - If the user's requirements are vague, make reasonable assumptions and note them clearly with "【假设】" markers
 - Don't over-engineer — match the design complexity to the project scope
+- Always end the confirmation with "请团队评审后发布" — team designs need review
+- This skill saves to team repos — for personal repos, use `personal-tech-design`
 
 ## Error Handling
 
@@ -146,20 +150,6 @@ Parameters:
 | `yuque_search` finds conflicting existing designs | Mention them and ask user how to reconcile |
 | `yuque_create_doc` fails | Show error, offer to output the markdown for manual copy |
 | User wants to update an existing design doc | Use `yuque_search` to find it, then suggest creating a v2 or appendix |
-
-## Example
-
-User: "帮我写一个用户权限系统的技术方案，要支持 RBAC，用 Go 实现，需要兼容现有的用户表。"
-
-1. Clarify: timeline? expected scale? existing auth system?
-2. Search: `yuque_search(query="权限系统 RBAC")` for existing docs
-3. Generate design doc with:
-   - Background: current permission gaps
-   - Design: RBAC model (users, roles, permissions), Go service architecture
-   - Data model: roles table, permissions table, user_roles mapping
-   - API: permission check endpoints
-   - Tech stack: Go + PostgreSQL + Casbin (with comparison to alternatives)
-   - Timeline: 3 phases over 4 weeks
-   - Risks: migration complexity, backward compatibility
-4. Present draft for review
-5. Save as draft to Yuque
+| User wants to save to personal repo | Suggest using `personal-tech-design` skill instead |
+| Group login not provided | Ask user for the team's group login |
+| Team Token not configured | Inform user that team repos require a team-level Token |

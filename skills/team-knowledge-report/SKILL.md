@@ -1,14 +1,14 @@
 ---
-name: knowledge-report
-description: Generate comprehensive monthly knowledge management reports by analyzing team Yuque activity data including group stats, member contributions, knowledge base health, and document trends. Use when the user wants a monthly review of their team's knowledge management on Yuque.
+name: team-knowledge-report
+description: Generate comprehensive monthly knowledge management reports by analyzing team Yuque activity data including group stats, member contributions, knowledge base health, and document trends. For team use — requires team Token with statistic:read permission.
 license: Apache-2.0
-compatibility: Requires yuque-mcp server. Yuque API Token must have `statistic:read` permission for group stats.
+compatibility: Requires yuque-mcp server. Yuque API Token must be a team Token with `statistic:read` permission for group stats.
 metadata:
   author: chen201724
-  version: "1.0"
+  version: "2.0"
 ---
 
-# Knowledge Report — Team Knowledge Management Monthly Report
+# Team Knowledge Report — Team Knowledge Management Monthly Report
 
 Collect comprehensive team data from Yuque (group stats, member contributions, knowledge base metrics, document activity) and generate a detailed monthly knowledge management report.
 
@@ -267,8 +267,9 @@ Parameters:
 
 | Situation | Action |
 |-----------|--------|
-| `yuque_group_stats` fails | Inform user, check group login |
+| `yuque_group_stats` fails | Inform user, check group login and team Token |
 | Any stats API returns partial data | Generate report with available data, note gaps |
 | Group has very low activity | Still generate report, focus suggestions on how to improve |
 | User doesn't know group login | Help them find it via `yuque_list_repos` |
 | Multiple groups | Ask user which group to report on |
+| Team Token missing statistic:read | Inform user the Token needs `statistic:read` permission |
