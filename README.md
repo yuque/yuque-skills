@@ -1,3 +1,7 @@
+> ⚠️ **This repository has been archived.** All skills have been consolidated into [yuque/yuque-plugin](https://github.com/yuque/yuque-plugin). Please use that repository for the latest skills and updates.
+
+---
+
 # Yuque Skills
 
 [Agent Skills](https://agentskills.io) for [Yuque (语雀)](https://www.yuque.com) — give AI assistants the ability to work with your Yuque knowledge base.
